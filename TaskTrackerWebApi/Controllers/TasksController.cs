@@ -35,6 +35,7 @@ namespace TaskTrackerWebApi.Controllers
             return  Ok(_context.Tasks.ToList());
         }
 
+
         /// <summary>  
         /// Gets Task by Id
         /// </summary>
@@ -44,7 +45,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="200">Got Task</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("{id}")]
+        [HttpGet("~/{id}")]
         public ActionResult<Task> GetTask(int id)
         {
             var task =  _context.Tasks.Find(id);
@@ -55,6 +56,28 @@ namespace TaskTrackerWebApi.Controllers
             }
 
             return Ok(task);
+        }
+
+
+        /// <summary>
+        /// Gets Tasks that are attached to a Project
+        /// </summary>
+        /// <param name="id">Id of a Project</param>>
+        /// <returns>Gets Tasks that are attached to a Project</returns>
+        /// <response code="404">Project not found by typed Id</response> 
+        /// <response code="200">Got Gets Tasks that are attached to a Project</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("~/GetProjectTasks/{id}")]
+        public ActionResult<IEnumerable<Task>> GetProjectTasks(int id)
+        {
+            var project = _context.Projects.Find(id);
+            if (project == null)
+            {
+                return NotFound();
+            }
+            var tasks = _context.Tasks.Where(x => x.ProjectId == id);
+            return Ok(tasks);
         }
 
 
@@ -121,7 +144,6 @@ namespace TaskTrackerWebApi.Controllers
             try { _context.SaveChanges(); }
             catch { return BadRequest(task); }
             return CreatedAtAction("GetTask", new { id = task.Id }, task);
-
         }
 
         /// <summary>

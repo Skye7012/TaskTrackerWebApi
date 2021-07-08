@@ -65,6 +65,9 @@ namespace TaskTrackerWebApi
             {
                 endpoints.MapControllers();
             });
+
+            app.UseDeveloperExceptionPage();
+
         }
     }
 }

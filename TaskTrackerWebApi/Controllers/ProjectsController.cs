@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTrackerWebApi.Models;
+using Task = TaskTrackerWebApi.Models.Task;
 
 namespace TaskTrackerWebApi.Controllers
 {
@@ -55,6 +56,7 @@ namespace TaskTrackerWebApi.Controllers
             }
             return Ok(project);
         }
+
 
         /// <summary>
         /// Updates a Project by Id
@@ -111,6 +113,25 @@ namespace TaskTrackerWebApi.Controllers
             catch { return BadRequest(project);}
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
+
+
+        ///// <summary>
+        ///// Adds new Task To Project
+        ///// </summary>
+        ///// <returns>A newly created Task that </returns>
+        ///// <response code="201">New Project created</response>
+        ///// <response code="400">Typed wrong request</response>
+        //[ProducesResponseType(StatusCodes.Status201Created)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[HttpPost("{name}")]
+        //public ActionResult<Project> AddTaskToProject(string name, string description, int projectId)
+        //{
+        //    Project project = new Project(name);
+        //    _context.Projects.Add(project);
+        //    try { _context.SaveChanges(); }
+        //    catch { return BadRequest(project); }
+        //    return CreatedAtAction("GetProject", new { id = project.Id }, project);
+        //}
 
 
         /// <summary>
