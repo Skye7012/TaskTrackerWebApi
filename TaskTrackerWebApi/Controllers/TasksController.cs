@@ -172,8 +172,12 @@ namespace TaskTrackerWebApi.Controllers
             {
                 return NotFound();
             }
-            _context.Tasks.Remove(task);
-            try { _context.SaveChanges(); return Ok(); }
+            try 
+            {
+                _context.Tasks.Remove(task);
+                _context.SaveChanges(); 
+                return Ok();
+            }
             catch { return BadRequest(); }
         }
 
