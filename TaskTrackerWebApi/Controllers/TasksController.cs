@@ -82,10 +82,10 @@ namespace TaskTrackerWebApi.Controllers
 
 
         /// <summary>
-        /// Gets all Projects ordered by Priority
+        /// Gets all Taks ordered by Priority
         /// </summary>
-        /// <returns>All Projects ordered by Priority</returns>
-        /// <response code="200">Got Projects</response>
+        /// <returns>All Taks ordered by Priority</returns>
+        /// <response code="200">Got Taks</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("~/api/GetTasks/OrderedBy/Priority")] 
         public ActionResult<Project> GetTasksOrderedByPriority()
