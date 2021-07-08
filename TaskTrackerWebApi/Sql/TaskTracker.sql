@@ -31,8 +31,8 @@ Values
 ('Create Db', 'Done','Create sql DataBase' , null, 1),
 ('Create Project', 'InProgress','Create Visual Studio Asp.Net Core WebApi project',  1, 1),
 ('Find a place', 'ToDo','Find a place to rest' , 1, 2),
-('DWH', 'ToDo','Prepare for DataWareHouse subject' , 1, 3),
-('Probability theory', 'ToDo','Prepare for Probability theory subject' , 2, 3)
+('Probability theory', 'ToDo','Prepare for Probability theory subject' , 2, 3),
+('DWH', 'ToDo','Prepare for DataWareHouse subject' , 1, 3)
 
 
 

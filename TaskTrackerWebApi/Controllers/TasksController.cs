@@ -45,7 +45,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="200">Got Task</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("~/{id}")]
+        [HttpGet("~/api/{id}")]
         public ActionResult<Task> GetTask(int id)
         {
             var task =  _context.Tasks.Find(id);
@@ -68,7 +68,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="200">Got Tasks that are attached to a Project</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("~/GetProjectTasks/{id}")]
+        [HttpGet("~/api/GetProjectTasks/{id}")]
         public ActionResult<IEnumerable<Task>> GetProjectTasks(int id)
         {
             var project = _context.Projects.Find(id);

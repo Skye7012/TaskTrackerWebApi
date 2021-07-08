@@ -59,6 +59,31 @@ namespace TaskTrackerWebApi.Controllers
 
 
         /// <summary>
+        /// Gets all Projects ordered by Priority
+        /// </summary>
+        /// <returns>All Projects ordered by Priority</returns>
+        /// <response code="200">Got Projects</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("~/api/GetProject/OrderedBy/Priority")]
+        public ActionResult<Project> GetProjectOrderedByPriority()
+        {
+            var projects = _context.Projects.ToList();
+            projects.Sort(delegate(Project x, Project y)
+            {
+                if (x.Priority == null && y.Priority == null) return 0;
+                else if (x.Priority == null) return -1;
+                else if (y.Priority == null) return 1;
+                else
+                {
+                    return x.Priority.Value.CompareTo(y.Priority.Value);
+                }
+            });
+            return Ok(projects);
+        }
+
+
+
+        /// <summary>
         /// Updates a Project by Id
         /// </summary>
         /// <remarks>
@@ -110,7 +135,7 @@ namespace TaskTrackerWebApi.Controllers
         /// Example: 2022-01-22T18:57:38 </param>>
         /// <param name="status">May set only 3 values: "NotStarted" OR "Active" OR "Completed"</param>>
         /// <param name="priority">The lower the number, the more significant the project.
-        /// Priotiry cannot be zero. Example: 12 </param>>
+        /// Priority cannot be zero. Example: 12 </param>>
         /// <returns>A newly created Project</returns>
         /// <response code="201">New Project created</response>
         /// <response code="400">Typed wrong request</response>
