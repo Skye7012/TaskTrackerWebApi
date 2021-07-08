@@ -105,25 +105,15 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Creates a Project 
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     {
-        ///        "id": 1,
-        ///        "name": "FirstProject"
-        ///     }
-        ///
-        /// </remarks>
         /// <returns>A newly created Project</returns>
         /// <response code="201">New Project created</response>
         /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost]
-        public  ActionResult<Project> PostProject(string name) //TODO: сделать поле Name required через Rout{} к примеру
+        [HttpPost("{name}")]
+        public  ActionResult<Project> PostProject(string name) 
         {
-            Project project = new Project(); //Переделать с помощью коструктора
-            project.Name = name;
+            Project project = new Project(name); 
             _context.Projects.Add(project);
             try {_context.SaveChanges(); }
             catch { return BadRequest(project);}

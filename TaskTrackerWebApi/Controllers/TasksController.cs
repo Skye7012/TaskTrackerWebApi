@@ -101,30 +101,21 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Creates a Task 
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     {
-        ///        "Id": 1,
-        ///        "Name": "FirstProject",
-        ///        "Description": "Try to make your first Project",
-        ///        "ProjectId": 1
-        ///     }
-        ///
-        /// </remarks>
         /// <param name="name">Name of the task</param>>
         /// <param name="description">Description of the task</param>>
         /// <param name="projectId">Id of Project that will keep new Task</param>>
         /// <returns>A newly created Task</returns>
         /// <response code="201">New Task created</response>
         /// <response code="400">Typed wrong request</response>
+        /// <response code="404">Project not found by typed Id</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[Route("api/Tasks")]
-        //[HttpPost/*("{name:string}/{description:string}/{projectId:int}")*/]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost("{name}/{description}/{projectId}")]
         public  ActionResult<Task> PostTask(string name, string description, int projectId)
         {
+            if (_context.Projects.Find(projectId) is null)
+                return NotFound();
             Task task = new Task(name,description,projectId);
             _context.Tasks.Add(task);
             try { _context.SaveChanges(); }
