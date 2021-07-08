@@ -120,9 +120,9 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public  ActionResult<Project> PostProject(string name)
+        public  ActionResult<Project> PostProject(string name) //TODO: сделать поле Name required через Rout{} к примеру
         {
-            Project project = new Project();
+            Project project = new Project(); //Переделать с помощью коструктора
             project.Name = name;
             _context.Projects.Add(project);
             try {_context.SaveChanges(); }

@@ -80,13 +80,9 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPut/*("{id}")*/]
-        public  IActionResult PutTask(/*int id, */Task task)
+        [HttpPut]
+        public  IActionResult PutTask(Task task)
         {
-            //if (id != task.Id)
-            //{
-            //    return BadRequest();
-            //}
             if (!TaskExists(task.Id))
                 return NotFound();
             else
@@ -102,15 +98,39 @@ namespace TaskTrackerWebApi.Controllers
             }
         }
 
-        // POST: api/Tasks
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<Task>> PostTask(Task task)
+        /// <summary>
+        /// Creates a Task 
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "Id": 1,
+        ///        "Name": "FirstProject",
+        ///        "Description": "Try to make your first Project",
+        ///        "ProjectId": 1
+        ///     }
+        ///
+        /// </remarks>
+        /// <param name="name">Name of the task</param>>
+        /// <param name="description">Description of the task</param>>
+        /// <param name="projectId">Id of Project that will keep new Task</param>>
+        /// <returns>A newly created Task</returns>
+        /// <response code="201">New Task created</response>
+        /// <response code="400">Typed wrong request</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[Route("api/Tasks")]
+        //[HttpPost/*("{name:string}/{description:string}/{projectId:int}")*/]
+        [HttpPost("{name}/{description}/{projectId}")]
+        public  ActionResult<Task> PostTask(string name, string description, int projectId)
         {
+            Task task = new Task(name,description,projectId);
             _context.Tasks.Add(task);
-            await _context.SaveChangesAsync();
-
+            try { _context.SaveChanges(); }
+            catch { return BadRequest(task); }
             return CreatedAtAction("GetTask", new { id = task.Id }, task);
+
         }
 
         // DELETE: api/Tasks/5
