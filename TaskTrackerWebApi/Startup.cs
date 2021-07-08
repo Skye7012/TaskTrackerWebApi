@@ -36,13 +36,13 @@ namespace TaskTrackerWebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TaskTrackerWebApi", Version = "v1" });
 
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";  //TODO:doc
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
 
            // services.AddSingleton(typeof(TaskTrackerContext)); //changed
-            services.AddScoped(typeof(TaskTrackerContext));
+            services.AddScoped(typeof(TaskTrackerContext));  //TODO:doc
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
