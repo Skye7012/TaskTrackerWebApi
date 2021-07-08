@@ -3,8 +3,8 @@ Implemention Web API for entering project data into the database (task tracker)
 
 ## Оглавление
 
-1. [Sql](#Sql/StartUp)
-2. [Controllers demonstration](#Controllers demonstration)
+1. [Sql/StartUp](#Sql/StartUp)
+2. [Controllers demonstration](#Controllers-demonstration)
 
 
 # Sql/StartUp
@@ -19,5 +19,5 @@ Copy MsSql Server name and database name and past it to /Models/TaskTrackerConte
 
 
 
-# Controllers demonstration
+# Controllers-demonstration
 
