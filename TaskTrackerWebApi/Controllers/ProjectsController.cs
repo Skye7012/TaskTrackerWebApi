@@ -135,7 +135,9 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Deletes a Project by Id
         /// </summary>
-        /// <param name="id">The Id of the Project to be deleted</param>
+        /// <remarks>Warning: it's realize cascade delete,
+        /// so Tasks that are kept by chosen Project will be deleted</remarks>
+        /// <param name="id">The Id of the Project to be deleted to</param>
         /// <response code="200">Project deleted</response>
         /// <response code="400">Typed wrong request</response>
         /// <response code="404">Project not found by typed Id</response>
@@ -145,10 +147,20 @@ namespace TaskTrackerWebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteProject(int id)
         {
+            using (TaskTrackerContext db = new TaskTrackerContext())
+            {
+                var prs = db.Projects.ToList();
+            }
             var project = _context.Projects.Find(id);
             if (project == null)
             {
                 return NotFound();
+            }
+            if(project.Tasks.Count > 0)
+            {
+                foreach (var task in project.Tasks)
+                    try { _context.Tasks.Remove(task); }
+                    catch { return BadRequest(); }
             }
             _context.Projects.Remove(project);
             try { _context.SaveChanges(); return Ok(); }
