@@ -11,10 +11,14 @@ namespace TaskTrackerWebApi.Models
         {
             Tasks = new HashSet<Task>();
         }
-        public Project(string name)
+        public Project(string name, DateTime? startDate, DateTime? completionDate, string status, int? priority)
         {
             Tasks = new HashSet<Task>();
             Name = name;
+            StartDate = startDate;
+            CompletionDate = completionDate;
+            Status = status;
+            Priority = priority;
         }
 
         public int Id { get; set; }

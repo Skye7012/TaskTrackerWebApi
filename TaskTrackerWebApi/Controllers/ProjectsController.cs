@@ -66,7 +66,11 @@ namespace TaskTrackerWebApi.Controllers
         ///
         ///     {
         ///        "Id": 1,
-        ///        "Mame": "FirstProject"
+        ///        "Name": "FirstProject",
+        ///        "StartDate": "2022-01-22"
+        ///        "CompletionDate": "2022-01-22T18:57:38"
+        ///        "Status": "NotStarted" OR "Active" OR "Completed",
+        ///        "Priority": 1
         ///     }
         ///
         /// </remarks>
@@ -99,39 +103,33 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Creates a Project 
         /// </summary>
+        /// <param name="name">Name of the Project</param>>
+        /// <param name="startDate">Date when you started to carry out the project.
+        /// Example: 2022-01-22 </param>>
+        /// <param name="completionDate">Date when you completed the project.
+        /// Example: 2022-01-22T18:57:38 </param>>
+        /// <param name="status">May set only 3 values: "NotStarted" OR "Active" OR "Completed"</param>>
+        /// <param name="priority">The lower the number, the more significant the project.
+        /// Priotiry cannot be zero. Example: 12 </param>>
         /// <returns>A newly created Project</returns>
         /// <response code="201">New Project created</response>
         /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpPost("{name}")]
-        public  ActionResult<Project> PostProject(string name) 
+        //[HttpPost("{name}/{startDate}/{completionDate}/{status}/{priority}")]
+        [HttpPost("{name}/{status}")]
+        public  ActionResult<Project> PostProject(string name, DateTime? startDate, DateTime? completionDate, string status, int? priority) 
         {
-            Project project = new Project(name); 
-            _context.Projects.Add(project);
-            try {_context.SaveChanges(); }
+            //TODO: поменять везде try{}catch{} на такой шаблон?
+            Project project = new Project(name, startDate, completionDate, status, priority);
+            try 
+            {
+                _context.Projects.Add(project);
+                _context.SaveChanges();
+            }
             catch { return BadRequest(project);}
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
-
-
-        ///// <summary>
-        ///// Adds new Task To Project
-        ///// </summary>
-        ///// <returns>A newly created Task that </returns>
-        ///// <response code="201">New Project created</response>
-        ///// <response code="400">Typed wrong request</response>
-        //[ProducesResponseType(StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[HttpPost("{name}")]
-        //public ActionResult<Project> AddTaskToProject(string name, string description, int projectId)
-        //{
-        //    Project project = new Project(name);
-        //    _context.Projects.Add(project);
-        //    try { _context.SaveChanges(); }
-        //    catch { return BadRequest(project); }
-        //    return CreatedAtAction("GetProject", new { id = project.Id }, project);
-        //}
 
 
         /// <summary>
