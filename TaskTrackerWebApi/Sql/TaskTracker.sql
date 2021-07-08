@@ -13,7 +13,7 @@ CompletionDate datetime,
 create table Task(
 Id int identity primary key,
 Name varchar(256) Not null,
-[Status] varchar(64) Not null Check([Status] in ('ToDo ', 'InProgress ', 'Done')),
+[Status] varchar(64) Not null Check([Status] in ('ToDo', 'InProgress', 'Done')),
 Description varchar(1028) Not null,
 [Priority] int Check([Priority] != 0),
 Project_id int References Project(Id) Not null)

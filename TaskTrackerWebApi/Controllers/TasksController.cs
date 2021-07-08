@@ -90,8 +90,10 @@ namespace TaskTrackerWebApi.Controllers
         ///     {
         ///        "Id": 1,
         ///        "Name": "FirstProject",
-        ///        "Description": "Try to make your first Project",
-        ///        "ProjectId": 1
+        ///        "Status": "ToDo" OR "InProgress" OR "Done"
+        ///        "Description": "FirstProject description"
+        ///        "Priority": 1
+        ///        "ProjectId": 1       
         ///     }
         ///
         /// </remarks>
