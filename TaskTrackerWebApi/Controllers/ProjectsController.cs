@@ -120,7 +120,6 @@ namespace TaskTrackerWebApi.Controllers
         [HttpPost("{name}/{status}")]
         public  ActionResult<Project> PostProject(string name, DateTime? startDate, DateTime? completionDate, string status, int? priority) 
         {
-            //TODO: поменять везде try{}catch{} на такой шаблон?
             Project project = new Project(name, startDate, completionDate, status, priority);
             try 
             {
@@ -158,8 +157,12 @@ namespace TaskTrackerWebApi.Controllers
                     try { _context.Tasks.Remove(task); }
                     catch { return BadRequest(); }
             }
-            _context.Projects.Remove(project);
-            try { _context.SaveChanges(); return Ok(); }
+            try 
+            {
+                _context.Projects.Remove(project); 
+                _context.SaveChanges(); 
+                return Ok(); 
+            }
             catch { return BadRequest(); }
         }
 

@@ -40,11 +40,9 @@ namespace TaskTrackerWebApi
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
             });
-
-           // services.AddSingleton(typeof(TaskTrackerContext)); //changed
             services.AddScoped(typeof(TaskTrackerContext));  //TODO:doc
         }
-
+        C
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
