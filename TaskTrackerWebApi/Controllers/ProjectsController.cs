@@ -147,10 +147,6 @@ namespace TaskTrackerWebApi.Controllers
         [HttpDelete("{id}")]
         public IActionResult DeleteProject(int id)
         {
-            using (TaskTrackerContext db = new TaskTrackerContext())
-            {
-                var prs = db.Projects.ToList();
-            }
             var project = _context.Projects.Find(id);
             if (project == null)
             {
