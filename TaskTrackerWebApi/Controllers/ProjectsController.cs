@@ -48,21 +48,37 @@ namespace TaskTrackerWebApi.Controllers
             return project;
         }
 
-        // PUT: api/Projects/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Updates a project by Id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "id": 1,
+        ///        "name": "FirstProject"
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>A updated Project</returns>
+        /// <response code="201">Returns the updated item</response>
+        /// <response code="400">If typed wrong Id</response>
+        /// <response code="404">If typed Id not found</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProject(int id, Project project)
+        public IActionResult PutProject(int id, Project project)
         {
             if (id != project.Id)
             {
                 return BadRequest();
             }
-
             _context.Entry(project).State = EntityState.Modified;
-
             try
             {
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
+                return Ok();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -72,21 +88,36 @@ namespace TaskTrackerWebApi.Controllers
                 }
                 else
                 {
-                    throw;
+                    return BadRequest();
                 }
             }
 
-            return NoContent();
+           // return NoContent();
         }
 
-        // POST: api/Projects
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /// <summary>
+        /// Creates a project 
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     {
+        ///        "id": 1,
+        ///        "name": "FirstProject"
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>A newly created Project</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>
+        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public async Task<ActionResult<Project>> PostProject(Project project)
+        public  ActionResult<Project> PostProject(Project project)
         {
             _context.Projects.Add(project);
-            await _context.SaveChangesAsync();
-
+            try { _context.SaveChanges(); }
+            catch { return BadRequest(project);}
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
 
