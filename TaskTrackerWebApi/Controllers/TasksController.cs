@@ -124,20 +124,27 @@ namespace TaskTrackerWebApi.Controllers
 
         }
 
-        // DELETE: api/Tasks/5
+        /// <summary>
+        /// Deletes a Task by Id
+        /// </summary>
+        /// <param name="id">The Id of the Task to be deleted</param>>
+        /// <response code="200">Task deleted</response>
+        /// <response code="400">Typed wrong request</response>
+        /// <response code="404">Task not found by typed Id</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTask(int id)
+        public IActionResult DeleteTask(int id)
         {
-            var task = await _context.Tasks.FindAsync(id);
+            var task =  _context.Tasks.Find(id);
             if (task == null)
             {
                 return NotFound();
             }
-
             _context.Tasks.Remove(task);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            try { _context.SaveChanges(); return Ok(); }
+            catch { return BadRequest(); }
         }
 
         private bool TaskExists(int id)

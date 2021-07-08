@@ -12,7 +12,7 @@ namespace TaskTrackerWebApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController : ControllerBase //TODO: write params
+    public class ProjectsController : ControllerBase 
     {
         private readonly TaskTrackerContext _context;
 
@@ -38,6 +38,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Gets Project by Id
         /// </summary>
+        /// <param name="id">Id of a Project</param>>
         /// <returns>Project by Id</returns>
         /// <response code="404">Project not found by typed Id</response> 
         /// <response code="200">Got Project</response>
@@ -55,7 +56,6 @@ namespace TaskTrackerWebApi.Controllers
             return Ok(project);
         }
 
-        //TODO: Upd params and coms
         /// <summary>
         /// Updates a Project by Id
         /// </summary>
@@ -68,6 +68,7 @@ namespace TaskTrackerWebApi.Controllers
         ///     }
         ///
         /// </remarks>
+        /// <param name="project">Modified Project entity</param>>
         /// <returns>Updated Project</returns>
         /// <response code="200">Project updated</response>
         /// <response code="400">Typed wrong request</response>
@@ -75,29 +76,20 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPut("{id}")]
-        public IActionResult PutProject(int id, Project project)
+        [HttpPut]
+        public IActionResult PutProject(Project project)
         {
-            if (id != project.Id)
+            if (!ProjectExists(project.Id))
+                return NotFound();
+            else
             {
-                return BadRequest();
-            }
-            _context.Entry(project).State = EntityState.Modified;
-            try
-            {
-                _context.SaveChanges();
-                return Ok();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProjectExists(id))
+                _context.Entry(project).State = EntityState.Modified;
+                try
                 {
-                    return NotFound();
+                    _context.SaveChanges();
+                    return Ok();
                 }
-                else
-                {
-                    return BadRequest();
-                }
+                catch { return BadRequest(); }
             }
         }
 
@@ -124,6 +116,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Deletes a Project by Id
         /// </summary>
+        /// <param name="id">The Id of the Project to be deleted</param>
         /// <response code="200">Project deleted</response>
         /// <response code="400">Typed wrong request</response>
         /// <response code="404">Project not found by typed Id</response>
