@@ -65,7 +65,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <param name="id">Id of a Project</param>>
         /// <returns>Gets Tasks that are attached to a Project</returns>
         /// <response code="404">Project not found by typed Id</response> 
-        /// <response code="200">Got Gets Tasks that are attached to a Project</response>
+        /// <response code="200">Got Tasks that are attached to a Project</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("~/GetProjectTasks/{id}")]
