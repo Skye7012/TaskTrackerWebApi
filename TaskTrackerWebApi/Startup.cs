@@ -41,7 +41,8 @@ namespace TaskTrackerWebApi
                 c.IncludeXmlComments(xmlPath);
             });
 
-            services.AddSingleton(typeof(TaskTrackerContext));
+           // services.AddSingleton(typeof(TaskTrackerContext)); //changed
+            services.AddScoped(typeof(TaskTrackerContext));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
