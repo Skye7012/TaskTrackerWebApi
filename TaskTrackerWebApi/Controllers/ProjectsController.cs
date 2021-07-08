@@ -94,6 +94,27 @@ namespace TaskTrackerWebApi.Controllers
 
            // return NoContent();
         }
+        //public IActionResult PutProject(int id, Project project)
+        //{
+        //    if (id != project.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    _context.Entry(project).State = EntityState.Modified;
+        //    var UpdEntity = _context.Projects.Find(id);
+        //    if (UpdEntity == null)
+        //        return NotFound();
+        //    else
+        //        try
+        //        {
+        //            _context.SaveChanges();
+        //            return Ok();
+        //        }
+        //        catch { return BadRequest(); }
+
+
+        //    return NoContent();
+        //}
 
         /// <summary>
         /// Creates a project 
