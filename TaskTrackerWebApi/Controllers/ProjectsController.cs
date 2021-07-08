@@ -9,6 +9,7 @@ using TaskTrackerWebApi.Models;
 
 namespace TaskTrackerWebApi.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectsController : ControllerBase
@@ -29,32 +30,16 @@ namespace TaskTrackerWebApi.Controllers
         {
             return  _context.Projects.ToList();
         }
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
-        //{
-        //    return await _context.Projects.ToListAsync();
-        //}
         /// <summary>
         /// Get project by Id
         /// </summary>
-        /// <remarks>
-        /// Sample request:
-        ///
-        ///     POST /Todo
-        ///     {
-        ///        "id": 1,
-        ///        "name": "Item1",
-        ///        "isComplete": true
-        ///     }
-        ///
-        /// </remarks>
-        /// <returns>Project with written Id</returns>
-        /// <response code="201">Returns the newly created item</response>
-        /// <response code="400">If the item is null</response>      
+        /// <returns>Project with entered Id</returns>
+        /// <response code="404">If entered wrong Id</response>      
         [HttpGet("{id}")]
-        public async Task<ActionResult<Project>> GetProject(int id)
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<Project> GetProject(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project =  _context.Projects.Find(id);
 
             if (project == null)
             {
