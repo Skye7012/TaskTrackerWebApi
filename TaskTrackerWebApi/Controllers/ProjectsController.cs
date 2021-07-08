@@ -22,7 +22,7 @@ namespace TaskTrackerWebApi.Controllers
         }
 
         /// <summary>
-        /// Get all projects
+        /// Gets all projects
         /// </summary>
         /// <returns>All projects</returns>
         [HttpGet]
@@ -31,10 +31,10 @@ namespace TaskTrackerWebApi.Controllers
             return  _context.Projects.ToList();
         }
         /// <summary>
-        /// Get project by Id
+        /// Gets project by Id
         /// </summary>
-        /// <returns>Project with entered Id</returns>
-        /// <response code="404">If entered wrong Id</response>      
+        /// <returns>Project by Id</returns>
+        /// <response code="404">Project not found by typed Id</response>      
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult<Project> GetProject(int id)
@@ -61,10 +61,10 @@ namespace TaskTrackerWebApi.Controllers
         ///
         /// </remarks>
         /// <returns>A updated Project</returns>
-        /// <response code="201">Returns the updated item</response>
-        /// <response code="400">If typed wrong Id</response>
-        /// <response code="404">If typed Id not found</response>
-        [ProducesResponseType(StatusCodes.Status201Created)] //TODO: change
+        /// <response code="200">Project updated</response>
+        /// <response code="400">Typed wrong request</response>
+        /// <response code="404">Project not found by typed Id</response>
+        [ProducesResponseType(StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPut("{id}")]
@@ -91,31 +91,7 @@ namespace TaskTrackerWebApi.Controllers
                     return BadRequest();
                 }
             }
-
-           // return NoContent();
         }
-        //public IActionResult PutProject(int id, Project project)
-        //{
-        //    if (id != project.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    _context.Entry(project).State = EntityState.Modified;
-        //    var UpdEntity = _context.Projects.Find(id);
-        //    if (UpdEntity == null)
-        //        return NotFound();
-        //    else
-        //        try
-        //        {
-        //            _context.SaveChanges();
-        //            return Ok();
-        //        }
-        //        catch { return BadRequest(); }
-
-
-        //    return NoContent();
-        //}
-
         /// <summary>
         /// Creates a project 
         /// </summary>
@@ -129,33 +105,42 @@ namespace TaskTrackerWebApi.Controllers
         ///
         /// </remarks>
         /// <returns>A newly created Project</returns>
-        /// <response code="201">Returns the newly created item</response>
-        /// <response code="400">If the item is null</response>
+        /// <response code="201">New Project created</response>
+        /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
-        public  ActionResult<Project> PostProject(Project project)
+        public  ActionResult<Project> PostProject(string name)
         {
+            Project project = new Project();
+            project.Name = name;
             _context.Projects.Add(project);
-            try { _context.SaveChanges(); }
+            try {_context.SaveChanges(); }
             catch { return BadRequest(project);}
             return CreatedAtAction("GetProject", new { id = project.Id }, project);
         }
 
-        // DELETE: api/Projects/5
+
+        /// <summary>
+        /// Deletes a project by Id
+        /// </summary>
+        /// <response code="200">Project deleted</response>
+        /// <response code="400">Typed wrong request</response>
+        /// <response code="404">Project not found by typed Id</response>
+        [ProducesResponseType(StatusCodes.Status200OK)] 
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProject(int id)
+        public IActionResult DeleteProject(int id)
         {
-            var project = await _context.Projects.FindAsync(id);
+            var project = _context.Projects.Find(id);
             if (project == null)
             {
                 return NotFound();
             }
-
             _context.Projects.Remove(project);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            try { _context.SaveChanges(); return Ok(); }
+            catch { return BadRequest(); }
         }
 
         private bool ProjectExists(int id)
