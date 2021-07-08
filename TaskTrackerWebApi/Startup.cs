@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using TaskTrackerWebApi.Models;
 //using Microsoft.OpenApi.Models;
 
 namespace TaskTrackerWebApi
@@ -40,6 +41,7 @@ namespace TaskTrackerWebApi
                 c.IncludeXmlComments(xmlPath);
             });
 
+            services.AddSingleton(typeof(TaskTrackerContext));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

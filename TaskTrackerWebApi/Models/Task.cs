@@ -11,7 +11,7 @@ namespace TaskTrackerWebApi.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public int ProjectId { get; set; }
-
+        [System.Text.Json.Serialization.JsonIgnore]
         public virtual Project Project { get; set; }
     }
 }
