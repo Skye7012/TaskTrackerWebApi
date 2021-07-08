@@ -82,6 +82,30 @@ namespace TaskTrackerWebApi.Controllers
 
 
         /// <summary>
+        /// Gets all Projects ordered by Priority
+        /// </summary>
+        /// <returns>All Projects ordered by Priority</returns>
+        /// <response code="200">Got Projects</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("~/api/GetTasks/OrderedBy/Priority")] 
+        public ActionResult<Project> GetTasksOrderedByPriority()
+        {
+            var tasks = _context.Tasks.ToList();
+            tasks.Sort(delegate(Task x, Task y)
+            {
+                if (x.Priority == null && y.Priority == null) return 0;
+                else if (x.Priority == null) return 1;
+                else if (y.Priority == null) return -1;
+                else
+                {
+                    return x.Priority.Value.CompareTo(y.Priority.Value);
+                }
+            });
+            return Ok(tasks);
+        }
+
+
+        /// <summary>
         /// Updates a Task by Id
         /// </summary>
         /// <remarks>

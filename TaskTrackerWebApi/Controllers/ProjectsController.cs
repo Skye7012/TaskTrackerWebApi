@@ -64,8 +64,8 @@ namespace TaskTrackerWebApi.Controllers
         /// <returns>All Projects ordered by Priority</returns>
         /// <response code="200">Got Projects</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("~/api/GetProject/OrderedBy/Priority")]
-        public ActionResult<Project> GetProjectOrderedByPriority()
+        [HttpGet("~/api/GetProjects/OrderedBy/Priority")]
+        public ActionResult<Project> GetProjectsOrderedByPriority()
         {
             var projects = _context.Projects.ToList();
             projects.Sort(delegate(Project x, Project y)
