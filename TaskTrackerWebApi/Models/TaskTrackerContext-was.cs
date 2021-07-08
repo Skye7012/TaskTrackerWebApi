@@ -37,18 +37,9 @@ namespace TaskTrackerWebApi.Models
             {
                 entity.ToTable("Project");
 
-                entity.Property(e => e.CompletionDate).HasColumnType("datetime");
-
                 entity.Property(e => e.Name)
                     .IsRequired()
                     .HasMaxLength(256)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.StartDate).HasColumnType("datetime");
-
-                entity.Property(e => e.Status)
-                    .IsRequired()
-                    .HasMaxLength(64)
                     .IsUnicode(false);
             });
 
@@ -68,16 +59,11 @@ namespace TaskTrackerWebApi.Models
 
                 entity.Property(e => e.ProjectId).HasColumnName("Project_id");
 
-                entity.Property(e => e.Status)
-                    .IsRequired()
-                    .HasMaxLength(64)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.Project)
                     .WithMany(p => p.Tasks)
                     .HasForeignKey(d => d.ProjectId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Task__Project_id__5EBF139D");
+                    .HasConstraintName("FK__Task__Project_id__2B3F6F97");
             });
 
             OnModelCreatingPartial(modelBuilder);
