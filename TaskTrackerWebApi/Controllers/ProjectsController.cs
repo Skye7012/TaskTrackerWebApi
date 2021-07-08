@@ -12,7 +12,7 @@ namespace TaskTrackerWebApi.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class ProjectsController : ControllerBase
+    public class ProjectsController : ControllerBase //TODO: write params
     {
         private readonly TaskTrackerContext _context;
 
@@ -21,22 +21,29 @@ namespace TaskTrackerWebApi.Controllers
             _context = context;
         }
 
+
         /// <summary>
-        /// Gets all projects
+        /// Gets all Projects
         /// </summary>
-        /// <returns>All projects</returns>
+        /// <returns>All Projects</returns>
+        /// <response code="200">Got Projects</response>
+        [ProducesResponseType(StatusCodes.Status200OK)] 
         [HttpGet]
         public ActionResult<IEnumerable<Project>> GetProjects()
         {
-            return  _context.Projects.ToList();
+            return  Ok(_context.Projects.ToList());
         }
+
+
         /// <summary>
-        /// Gets project by Id
+        /// Gets Project by Id
         /// </summary>
         /// <returns>Project by Id</returns>
-        /// <response code="404">Project not found by typed Id</response>      
-        [HttpGet("{id}")]
+        /// <response code="404">Project not found by typed Id</response> 
+        /// <response code="200">Got Project</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{id}")]
         public ActionResult<Project> GetProject(int id)
         {
             var project =  _context.Projects.Find(id);
@@ -45,22 +52,23 @@ namespace TaskTrackerWebApi.Controllers
             {
                 return NotFound();
             }
-            return project;
+            return Ok(project);
         }
 
+        //TODO: Upd params and coms
         /// <summary>
-        /// Updates a project by Id
+        /// Updates a Project by Id
         /// </summary>
         /// <remarks>
         /// Sample request:
         ///
         ///     {
-        ///        "id": 1,
-        ///        "name": "FirstProject"
+        ///        "Id": 1,
+        ///        "Mame": "FirstProject"
         ///     }
         ///
         /// </remarks>
-        /// <returns>A updated Project</returns>
+        /// <returns>Updated Project</returns>
         /// <response code="200">Project updated</response>
         /// <response code="400">Typed wrong request</response>
         /// <response code="404">Project not found by typed Id</response>
@@ -92,8 +100,10 @@ namespace TaskTrackerWebApi.Controllers
                 }
             }
         }
+
+
         /// <summary>
-        /// Creates a project 
+        /// Creates a Project 
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -122,7 +132,7 @@ namespace TaskTrackerWebApi.Controllers
 
 
         /// <summary>
-        /// Deletes a project by Id
+        /// Deletes a Project by Id
         /// </summary>
         /// <response code="200">Project deleted</response>
         /// <response code="400">Typed wrong request</response>
@@ -142,6 +152,7 @@ namespace TaskTrackerWebApi.Controllers
             try { _context.SaveChanges(); return Ok(); }
             catch { return BadRequest(); }
         }
+
 
         private bool ProjectExists(int id)
         {
