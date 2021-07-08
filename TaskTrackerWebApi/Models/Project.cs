@@ -28,7 +28,6 @@ namespace TaskTrackerWebApi.Models
         public string Status { get; set; }
         public int? Priority { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
-        //[Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Task> Tasks { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace TaskTrackerWebApi.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=desktop-bdt1agl;Database=TaskTracker;Trusted_Connection=True;");
-                optionsBuilder.UseLazyLoadingProxies(); //Allow to use Lazy Loading of Related Data
+                //optionsBuilder.UseLazyLoadingProxies(); //Allow to use Lazy Loading of Related Data
             }
         }
 
