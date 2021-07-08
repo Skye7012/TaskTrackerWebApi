@@ -69,7 +69,7 @@ namespace TaskTrackerWebApi.Controllers
         ///        "Name": "FirstProject",
         ///        "StartDate": "2022-01-22"
         ///        "CompletionDate": "2022-01-22T18:57:38"
-        ///        "Status": "NotStarted" OR "Active" OR "Completed",
+        ///        "Status": "NotStarted" OR "Active" OR "Completed", (You may set only one of this three values)
         ///        "Priority": 1
         ///     }
         ///

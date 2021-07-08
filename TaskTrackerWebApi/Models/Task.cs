@@ -7,10 +7,12 @@ namespace TaskTrackerWebApi.Models
 {
     public partial class Task
     {
-        public Task(string name, string description, int projectId)
+        public Task(string name, string status, string description, int? priority, int projectId)
         {
             Name = name;
+            Status = status;
             Description = description;
+            Priority = priority;
             ProjectId = projectId;
         }
         public int Id { get; set; }

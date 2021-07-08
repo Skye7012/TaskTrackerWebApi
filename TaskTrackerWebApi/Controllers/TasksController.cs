@@ -90,9 +90,9 @@ namespace TaskTrackerWebApi.Controllers
         ///     {
         ///        "Id": 1,
         ///        "Name": "FirstProject",
-        ///        "Status": "ToDo" OR "InProgress" OR "Done"
-        ///        "Description": "FirstProject description"
-        ///        "Priority": 1
+        ///        "Status": "ToDo" OR "InProgress" OR "Done", (You may set only one of this three values)
+        ///        "Description": "FirstProject description",
+        ///        "Priority": 1,
         ///        "ProjectId": 1       
         ///     }
         ///
@@ -127,7 +127,10 @@ namespace TaskTrackerWebApi.Controllers
         /// Creates a Task 
         /// </summary>
         /// <param name="name">Name of the task</param>>
+        /// <param name="status">May set only 3 values: "ToDo" OR "InProgress" OR "Done"</param>>
         /// <param name="description">Description of the task</param>>
+        /// <param name="priority">The lower the number, the more significant the project.
+        /// Priotiry cannot be zero. Example: 12 </param>>
         /// <param name="projectId">Id of Project that will keep new Task</param>>
         /// <returns>A newly created Task</returns>
         /// <response code="201">New Task created</response>
@@ -136,14 +139,17 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpPost("{name}/{description}/{projectId}")]
-        public  ActionResult<Task> PostTask(string name, string description, int projectId)
+        [HttpPost("{name}/{status}/{description}/{projectId}")]
+        public  ActionResult<Task> PostTask(string name, string status, string description, int? priority, int projectId)
         {
             if (_context.Projects.Find(projectId) is null)
                 return NotFound();
-            Task task = new Task(name,description,projectId);
-            _context.Tasks.Add(task);
-            try { _context.SaveChanges(); }
+            Task task = new Task(name,status, description, priority,projectId);
+            try 
+            {
+                _context.Tasks.Add(task);
+                _context.SaveChanges(); 
+            }
             catch { return BadRequest(task); }
             return CreatedAtAction("GetTask", new { id = task.Id }, task);
         }
