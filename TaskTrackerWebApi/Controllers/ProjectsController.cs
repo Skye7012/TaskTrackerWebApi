@@ -20,14 +20,37 @@ namespace TaskTrackerWebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Projects
+        /// <summary>
+        /// Get all projects
+        /// </summary>
+        /// <returns>All projects</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        public ActionResult<IEnumerable<Project>> GetProjects()
         {
-            return await _context.Projects.ToListAsync();
+            return  _context.Projects.ToList();
         }
-
-        // GET: api/Projects/5
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Project>>> GetProjects()
+        //{
+        //    return await _context.Projects.ToListAsync();
+        //}
+        /// <summary>
+        /// Get project by Id
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /Todo
+        ///     {
+        ///        "id": 1,
+        ///        "name": "Item1",
+        ///        "isComplete": true
+        ///     }
+        ///
+        /// </remarks>
+        /// <returns>Project with written Id</returns>
+        /// <response code="201">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response>      
         [HttpGet("{id}")]
         public async Task<ActionResult<Project>> GetProject(int id)
         {
@@ -37,7 +60,6 @@ namespace TaskTrackerWebApi.Controllers
             {
                 return NotFound();
             }
-
             return project;
         }
 

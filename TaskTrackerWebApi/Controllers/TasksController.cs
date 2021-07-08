@@ -21,7 +21,11 @@ namespace TaskTrackerWebApi.Controllers
             _context = context;
         }
 
-        // GET: api/Tasks
+
+        /// <summary>
+        /// Some summary
+        /// </summary>
+        /// <returns>A newly created TodoItem</returns> 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Task>>> GetTasks()
         {
