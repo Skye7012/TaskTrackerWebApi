@@ -4,14 +4,15 @@ Implemention Web API for entering project data into the database (task tracker)
 ## Оглавление
 
 1. [Sql/StartUp](#Sql/StartUp)
-2. [ProjectController demonstration](#ProjectController-demonstration)
+    1.[SetConnectionString](#SetConnectionString)
+3. [ProjectController demonstration](#ProjectController-demonstration)
     1. [GetProjects()](#GetProjects())
     2. [GetProject()](#GetProject(int-id))
     3. [GetProjectsOrderedByPriority()](#GetProjectsOrderedByPriority())
     4. [PutProject(Project project)](#PutProject(Project-project))
     5. [PostProject()](#PostProject())
     6. [DeleteProject(int id)](#DeleteProject(int-id))
-3. [TaskController demonstration](#TaskController-demonstration)
+4. [TaskController demonstration](#TaskController-demonstration)
     1. [GetTasks()](#GetTasks())
     2. [GetTask(int id)](#GetTask(int-id))
     3. [GetProjectTasks(int id)](#GetProjectTasks(int-id))
@@ -25,6 +26,7 @@ Implemention Web API for entering project data into the database (task tracker)
 1) In folder /Sql places .sql script for create database </br>
 Created database should have this schema: </br>
 ![image](https://user-images.githubusercontent.com/86796337/124998109-80571f00-e054-11eb-9994-5530c47a3ca7.png) </br> </br>
+## SetConnectionString
 Paste your connectionString to [connectionString.txt](TaskTrackerWebApi/connectionString.txt)
 By following this video:
 <details><summary>How to set connectionString</summary>
