@@ -23,7 +23,7 @@ Created database should have this schema: </br>
 ## SetConnectionString
 Paste your connectionString to [connectionString.txt](TaskTrackerWebApi/connectionString.txt)
 By following this video:
-<details><summary>How to set connectionString</summary>
+<details><summary><b>How to set connectionString</b></summary>
 
 
 https://user-images.githubusercontent.com/86796337/125048164-50d20200-e0a8-11eb-8019-7a89d5111866.mp4
