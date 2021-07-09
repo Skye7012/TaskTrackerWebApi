@@ -6,12 +6,6 @@ Implemention Web API for entering project data into the database (task tracker)
 1. [Sql/StartUp](#Sql/StartUp)
     1.[SetConnectionString](#SetConnectionString)
 3. [ProjectController demonstration](#ProjectController-demonstration)
-    1. [GetProjects()](#GetProjects())
-    2. [GetProject()](#GetProject(int-id))
-    3. [GetProjectsOrderedByPriority()](#GetProjectsOrderedByPriority())
-    4. [PutProject(Project project)](#PutProject(Project-project))
-    5. [PostProject()](#PostProject())
-    6. [DeleteProject(int id)](#DeleteProject(int-id))
 4. [TaskController demonstration](#TaskController-demonstration)
     1. [GetTasks()](#GetTasks())
     2. [GetTask(int id)](#GetTask(int-id))
@@ -45,8 +39,6 @@ ___
 # ProjectController demonstration
 
 
-## GetProjects()
-
 <details><summary>GetProjects() demonstration</summary>
 
 
@@ -57,8 +49,6 @@ https://user-images.githubusercontent.com/86796337/125028506-d21d9a80-e090-11eb-
 
 
 
-## GetProject(int id)
-
 <details><summary>GetProject(int id) demonstration</summary>
 
 
@@ -66,9 +56,6 @@ https://user-images.githubusercontent.com/86796337/125029275-0d6c9900-e092-11eb-
 
 
 </details>
-
-
-## GetProjectsOrderedByPriority()
 
 
 <details><summary> GetProjectsOrderedByPriority() demonstration</summary>
@@ -79,9 +66,6 @@ https://user-images.githubusercontent.com/86796337/125030165-4e18e200-e093-11eb-
 
 </details>
 
-
-## PutProject(Project project)
-
 <details><summary>PutProject(Project project)demonstration</summary>
 
 
@@ -89,9 +73,6 @@ https://user-images.githubusercontent.com/86796337/125030556-f6c74180-e093-11eb-
 
 </details>
 
-
-
-## PostProject()
 
 <details><summary>PostProject() demonstration</summary>
 
@@ -101,8 +82,6 @@ https://user-images.githubusercontent.com/86796337/125031352-32aed680-e095-11eb-
 
 </details>
 
-
-## DeleteProject(int id)
 
 <details><summary>DeleteProject(int id) demonstration</summary>
 
