@@ -5,7 +5,7 @@ Implemention Web API for entering project data into the database (task tracker)
 
 1. [Sql/StartUp](#Sql/StartUp)
 2. [ProjectController demonstration](#ProjectController-demonstration)
-    1. [GetProjects()](#GetProjects())
+    1. [GetProjects()](##GetProjects())
     2. [GetProject()](#GetProject(int-id))
     3. [GetProjectsOrderedByPriority()](#GetProjectsOrderedByPriority())
     4. [PutProject(Project project)](#PutProject(Project-project))
