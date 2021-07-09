@@ -10,6 +10,7 @@ Implemention Web API for entering project data into the database (task tracker)
     3. [GetProjectsOrderedByPriority()](#GetProjectsOrderedByPriority())
     4. [PutProject(Project project)](#PutProject(Project-project))
     5. [PostProject()](#PostProject())
+    6. [DeleteProject(int id)](#DeleteProject(int-id))
          
 
 # Sql/StartUp
@@ -46,6 +47,12 @@ https://user-images.githubusercontent.com/86796337/125030556-f6c74180-e093-11eb-
 ## PostProject()
 
 https://user-images.githubusercontent.com/86796337/125031352-32aed680-e095-11eb-867e-52169c283986.mp4
+
+## DeleteProject(int id)
+
+https://user-images.githubusercontent.com/86796337/125032202-49a1f880-e096-11eb-88b0-b8d9fe237aa5.mp4
+
+
 
 
 
