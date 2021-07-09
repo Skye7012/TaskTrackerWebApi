@@ -11,6 +11,8 @@ Implemention Web API for entering project data into the database (task tracker)
     4. [PutProject(Project project)](#PutProject(Project-project))
     5. [PostProject()](#PostProject())
     6. [DeleteProject(int id)](#DeleteProject(int-id))
+3. [TaskController demonstration](#TaskController-demonstration)
+    1. [GetTasks()](#GetTasks())
          
 
 # Sql/StartUp
@@ -51,6 +53,16 @@ https://user-images.githubusercontent.com/86796337/125031352-32aed680-e095-11eb-
 ## DeleteProject(int id)
 
 https://user-images.githubusercontent.com/86796337/125032202-49a1f880-e096-11eb-88b0-b8d9fe237aa5.mp4
+
+___
+# TaskController demonstration
+
+## GetTasks()
+
+https://user-images.githubusercontent.com/86796337/125032445-a56c8180-e096-11eb-8d66-84954dc5a0de.mp4
+
+
+
 
 
 
