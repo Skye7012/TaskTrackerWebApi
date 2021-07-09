@@ -3,8 +3,8 @@ Implemention Web API for entering project data into the database (task tracker)
 
 ## Оглавление
 
-1. [Sql/StartUp](#Sql/StartUp)
-    1.[SetConnectionString](#SetConnectionString)
+1. [Sql/StartUp](#Sql/StartUp) <br>
+   1.1.  [SetConnectionString](#SetConnectionString)
 2. [ProjectController demonstration](#ProjectController-demonstration)
 3. [TaskController demonstration](#TaskController-demonstration)
          
