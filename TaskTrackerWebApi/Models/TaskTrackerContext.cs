@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using System.IO;
 
 #nullable disable
 
@@ -24,7 +25,8 @@ namespace TaskTrackerWebApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=desktop-bdt1agl;Database=TaskTracker;Trusted_Connection=True;");
+                //optionsBuilder.UseSqlServer("Server=desktop-bdt1agl;Database=TaskTracker;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer(File.ReadAllText("connectionString.txt"));
             }
         }
 

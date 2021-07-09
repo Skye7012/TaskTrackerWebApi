@@ -1,0 +1,1 @@
+Server=desktop-bdt1agl;Database=TaskTracker2;Trusted_Connection=True;
