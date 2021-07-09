@@ -5,15 +5,8 @@ Implemention Web API for entering project data into the database (task tracker)
 
 1. [Sql/StartUp](#Sql/StartUp)
     1.[SetConnectionString](#SetConnectionString)
-3. [ProjectController demonstration](#ProjectController-demonstration)
-4. [TaskController demonstration](#TaskController-demonstration)
-    1. [GetTasks()](#GetTasks())
-    2. [GetTask(int id)](#GetTask(int-id))
-    3. [GetProjectTasks(int id)](#GetProjectTasks(int-id))
-    4. [GetTasksOrderedByPriority()](#GetTasksOrderedByPriority())
-    5. [PutTask(Task task)](#PutTask(Task-task))
-    6. [PostTask()](#PostTask())
-    7. [DeleteTask(int id)](#DeleteTask(int-id))
+2. [ProjectController demonstration](#ProjectController-demonstration)
+3. [TaskController demonstration](#TaskController-demonstration)
          
 
 # Sql/StartUp
@@ -95,39 +88,74 @@ https://user-images.githubusercontent.com/86796337/125032202-49a1f880-e096-11eb-
 ___
 # TaskController demonstration
 
-## GetTasks()
+<details><summary>GetTasks() demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125032445-a56c8180-e096-11eb-8d66-84954dc5a0de.mp4
 
 
-## GetTask(int id)
+</details>
+
+
+
+<details><summary>GetTask(int id) demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125032628-eebcd100-e096-11eb-934e-2d9f4be42689.mp4
 
 
-## GetProjectTasks(int id)
+</details>
 
+
+
+<details><summary>GetProjectTasks(int id) demonstration</summary>
+
+    
 https://user-images.githubusercontent.com/86796337/125032832-30e61280-e097-11eb-91ab-f2875301bbfb.mp4
 
+    
+</details>
 
-## GetTasksOrderedByPriority()
+
+<details><summary>GetTasksOrderedByPriority() demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125032976-67bc2880-e097-11eb-8ae7-106b27d8dc66.mp4
 
 
-## PutTask(Task task)
+</details>
+
+
+<details><summary>PutTask(Task task) demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125033210-b4076880-e097-11eb-80d0-c4167c3dee18.mp4
 
 
-## PostTask()
+</details>
+
+
+
+
+<details><summary>PostTask() demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125033474-05175c80-e098-11eb-8477-c2dca3ec1c33.mp4
 
 
-## DeleteTask(int id)
+</details>
+
+
+=
+<details><summary>DeleteTask(int id)demonstration</summary>
+
 
 https://user-images.githubusercontent.com/86796337/125033642-414abd00-e098-11eb-889f-9c841fd8f573.mp4
+
+
+</details>
+
+
 
 
 
