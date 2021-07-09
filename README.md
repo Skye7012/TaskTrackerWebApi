@@ -5,8 +5,9 @@ Implemention Web API for entering project data into the database (task tracker)
 
 1. [Sql/StartUp](#Sql/StartUp)
 2. [Controllers demonstration](#Controllers-demonstration)
-    2.1. [ProjectGet Methods()](#ProjectGet-Methods)
-
+    2.1. [ProjectController](#ProjectController)
+        2.1.1. [GetProjects()](#GetProjects())
+        2.1.1. [GetProject(int id)](#GetProject(int id))
 
 # Sql/StartUp
 1) In folder /Sql places .sql script for create database </br>
@@ -22,11 +23,18 @@ Copy MsSql Server name and database name and past it to /Models/TaskTrackerConte
 
 
 # Controllers-demonstration
-## ProjectGet-Methods
-asd
-
-
+ </br>
+## ProjectController
+ </br>
+### GetProjects()
+ </br>
 https://user-images.githubusercontent.com/86796337/125028506-d21d9a80-e090-11eb-8377-6498e86cd461.mp4
+ </br>
+ ### GetProject(int id)
+ </br>
+https://user-images.githubusercontent.com/86796337/125029275-0d6c9900-e092-11eb-86b8-1cb7c4f5513b.mp4
+
+
 
 
 
