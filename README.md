@@ -14,6 +14,7 @@ Implemention Web API for entering project data into the database (task tracker)
 3. [TaskController demonstration](#TaskController-demonstration)
     1. [GetTasks()](#GetTasks())
     2. [GetTask(int id)](#GetTask(int-id))
+    3. [GetProjectTasks(int id)](#GetProjectTasks(int-id))
          
 
 # Sql/StartUp
@@ -65,8 +66,17 @@ https://user-images.githubusercontent.com/86796337/125032445-a56c8180-e096-11eb-
 
 ## GetTask(int id)
 
-
 https://user-images.githubusercontent.com/86796337/125032628-eebcd100-e096-11eb-934e-2d9f4be42689.mp4
+
+
+## GetProjectTasks(int id)
+
+https://user-images.githubusercontent.com/86796337/125032832-30e61280-e097-11eb-91ab-f2875301bbfb.mp4
+
+
+
+
+
 
 
 
