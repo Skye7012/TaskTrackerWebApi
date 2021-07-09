@@ -8,6 +8,7 @@ Implemention Web API for entering project data into the database (task tracker)
     1. [GetProjects()](#GetProjects())
     2. [GetProject()](#GetProject(int id))
     3. [GetProjectsOrderedByPriority()](#GetProjectsOrderedByPriority())
+    4. [PutProject(Project project)](#PutProject(Project-project))
          
 
 # Sql/StartUp
@@ -23,7 +24,7 @@ Copy MsSql Server name and database name and past it to /Models/TaskTrackerConte
 
 
 
-# ProjectController-demonstration
+# ProjectController demonstration
 
 ## GetProjects()
 
@@ -36,6 +37,12 @@ https://user-images.githubusercontent.com/86796337/125029275-0d6c9900-e092-11eb-
 ## GetProjectsOrderedByPriority()
 
 https://user-images.githubusercontent.com/86796337/125030165-4e18e200-e093-11eb-9f20-93342a75ed6d.mp4
+
+## PutProject(Project project)
+
+https://user-images.githubusercontent.com/86796337/125030556-f6c74180-e093-11eb-894b-5b860ac7c950.mp4
+
+
 
 
 
