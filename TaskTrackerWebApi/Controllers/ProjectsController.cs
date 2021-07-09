@@ -169,7 +169,7 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete("{id}")]
-        public IActionResult DeleteProject(int id) //ToDo: change lazy loading to explicit loading, Delete proxy nugetPackage
+        public IActionResult DeleteProject(int id) 
         {
             var project = _context.Projects.Find(id);
             if (project == null)
