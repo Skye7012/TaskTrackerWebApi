@@ -13,7 +13,8 @@ Implemention Web API for entering project data into the database (task tracker)
 Created database should have this schema: </br>
 ![image](https://user-images.githubusercontent.com/86796337/124998109-80571f00-e054-11eb-9994-5530c47a3ca7.png) </br> </br>
 Copy MsSql Server name and database name and past it to /Models/TaskTrackerContext.cs </br>
-![image](https://user-images.githubusercontent.com/86796337/124998572-5520ff80-e055-11eb-9835-0ef03f3a7f98.png) </br> </br> </br> </br>
+![image](https://user-images.githubusercontent.com/86796337/125024831-3557fe80-e08a-11eb-8f7e-081ee04ee98b.png)
+ </br> </br> </br> </br>
 
 
 
