@@ -59,23 +59,59 @@ https://user-images.githubusercontent.com/86796337/125028506-d21d9a80-e090-11eb-
 
 ## GetProject(int id)
 
+<details><summary>GetProject(int id) demonstration</summary>
+
+
 https://user-images.githubusercontent.com/86796337/125029275-0d6c9900-e092-11eb-86b8-1cb7c4f5513b.mp4
+
+
+</details>
+
 
 ## GetProjectsOrderedByPriority()
 
+
+<details><summary> GetProjectsOrderedByPriority() demonstration</summary>
+
+
 https://user-images.githubusercontent.com/86796337/125030165-4e18e200-e093-11eb-9f20-93342a75ed6d.mp4
+
+
+</details>
+
 
 ## PutProject(Project project)
 
+<details><summary>PutProject(Project project)demonstration</summary>
+
+
 https://user-images.githubusercontent.com/86796337/125030556-f6c74180-e093-11eb-894b-5b860ac7c950.mp4
+
+</details>
+
+
 
 ## PostProject()
 
+<details><summary>PostProject() demonstration</summary>
+
+
 https://user-images.githubusercontent.com/86796337/125031352-32aed680-e095-11eb-867e-52169c283986.mp4
+
+
+</details>
+
 
 ## DeleteProject(int id)
 
+<details><summary>DeleteProject(int id) demonstration</summary>
+
+
 https://user-images.githubusercontent.com/86796337/125032202-49a1f880-e096-11eb-88b0-b8d9fe237aa5.mp4
+
+
+</details>
+
 
 ___
 # TaskController demonstration
