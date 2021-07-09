@@ -25,7 +25,6 @@ namespace TaskTrackerWebApi.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //optionsBuilder.UseSqlServer("Server=desktop-bdt1agl;Database=TaskTracker;Trusted_Connection=True;");
                 optionsBuilder.UseSqlServer(File.ReadAllText("connectionString.txt"));
             }
         }
