@@ -17,6 +17,7 @@ Implemention Web API for entering project data into the database (task tracker)
     3. [GetProjectTasks(int id)](#GetProjectTasks(int-id))
     4. [GetTasksOrderedByPriority()](#GetTasksOrderedByPriority())
     5. [PutTask(Task task)](#PutTask(Task-task))
+    6. [PostTask()](#PostTask())
          
 
 # Sql/StartUp
@@ -83,8 +84,12 @@ https://user-images.githubusercontent.com/86796337/125032976-67bc2880-e097-11eb-
 
 ## PutTask(Task task)
 
-
 https://user-images.githubusercontent.com/86796337/125033210-b4076880-e097-11eb-80d0-c4167c3dee18.mp4
+
+
+## PostTask()
+
+https://user-images.githubusercontent.com/86796337/125033474-05175c80-e098-11eb-8477-c2dca3ec1c33.mp4
 
 
 
