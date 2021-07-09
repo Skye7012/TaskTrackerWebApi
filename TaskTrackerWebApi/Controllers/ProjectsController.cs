@@ -46,7 +46,7 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{id}")]
-        public ActionResult<Project> GetProject(int id) //TODO: Fix Lazy Loader Files
+        public ActionResult<Project> GetProject(int id) 
         {
             var project =  _context.Projects.Find(id);
 
