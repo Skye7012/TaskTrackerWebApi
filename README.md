@@ -26,6 +26,14 @@ Implemention Web API for entering project data into the database (task tracker)
 Created database should have this schema: </br>
 ![image](https://user-images.githubusercontent.com/86796337/124998109-80571f00-e054-11eb-9994-5530c47a3ca7.png) </br> </br>
 Paste your connectionString to [connectionString.txt](TaskTrackerWebApi/connectionString.txt)
+By following this video:
+<details><summary>How to set connectionString</summary>
+
+
+https://user-images.githubusercontent.com/86796337/125048164-50d20200-e0a8-11eb-8019-7a89d5111866.mp4
+
+
+</details>
 
 
 
