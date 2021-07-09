@@ -1,5 +1,5 @@
 # TaskTrackerWebApi
-Implemention Web API for entering project data into the database (task tracker)
+Implementation Web API for entering project data into the database (task tracker)
 
 ## Оглавление
 
@@ -10,7 +10,7 @@ Implemention Web API for entering project data into the database (task tracker)
          
 
 # Sql/StartUp
-1) In folder Sql places [.sql script]((TaskTrackerWebApi/Sql/TaskTracker.sql)) for create database </br>
+1) In folder Sql places [.sql script](TaskTrackerWebApi/Sql/TaskTracker.sql) for create database </br>
 Created database should have this schema: </br>
 ![image](https://user-images.githubusercontent.com/86796337/124998109-80571f00-e054-11eb-9994-5530c47a3ca7.png) </br> </br>
 ## SetConnectionString
