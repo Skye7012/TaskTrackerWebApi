@@ -39,7 +39,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Gets Project by Id
         /// </summary>
-        /// <param name="id">Id of a Project</param>>
+        /// <param name="id">Id of a Project</param>
         /// <returns>Project by Id</returns>
         /// <response code="404">Project not found by typed Id</response> 
         /// <response code="200">Got Project</response>
@@ -65,8 +65,9 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="200">Got Projects</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("~/api/GetProjects/OrderedBy/Priority")]
-        public ActionResult<Project> GetProjectsOrderedByPriority()
+        public ActionResult<Project> GetProjectsOrderedByPriority() //TODO:REDO
         {
+           // var c = _context.Projects.OrderBy(x => x.StartDate);
             var projects = _context.Projects.ToList();
             projects.Sort(delegate(Project x, Project y)
             {
@@ -78,6 +79,46 @@ namespace TaskTrackerWebApi.Controllers
                     return x.Priority.Value.CompareTo(y.Priority.Value);
                 }
             });
+            return Ok(projects);
+        }
+
+        //TODO: type br in other comms
+        /// <summary>
+        /// Gets all Projects ordered by chosen field
+        /// </summary>
+        /// <param name="field">The name of the field by which projects will be sorted <br/>
+        /// May set only 4 values: Name OR StartDate OR CompletionDate OR Priority <br/>
+        /// Example: Name</param>
+        /// <param name="orderType">May set only 2 values: Asc OR Desc <br/>
+        /// Example: Asc <br/>
+        /// Asc is an ascending sort <br/>
+        /// Desc is a descending sort</param> 
+        /// <returns>All Projects ordered by chosen field</returns>
+        /// <response code="200">Got ordered Projects</response>
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet("~/api/GetProjects/OrderedBy/{field}/{orderType}")]
+        public ActionResult<Project> GetProjectsOrderedByField(string field, string orderType) //TODO:complete
+        {
+            List<Project> projects;
+            switch(field)
+            {
+                case "Name":
+                    projects = _context.Projects.OrderBy(x => x.Name).ToList();
+                    break;
+                case "StartDate":
+                    projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate).ToList();
+                    projects.AddRange(_context.Projects.Where(x => !x.StartDate.HasValue)); //nullable values are placed at the end
+                    break;
+                case "CompletionDate":
+                    projects = _context.Projects.Where(x => x.CompletionDate.HasValue).OrderBy(x => x.CompletionDate).ToList(); //TODO: test with new data
+                    projects.AddRange(_context.Projects.Where(x => !x.CompletionDate.HasValue)); //nullable values are placed at the end
+                    break;
+                case "Priority":
+                    projects = _context.Projects.OrderBy(x => x.Priority).ToList();
+                    break;
+                default:
+                    return BadRequest();
+            }
             return Ok(projects);
         }
 
@@ -99,7 +140,7 @@ namespace TaskTrackerWebApi.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <param name="project">Modified Project entity</param>>
+        /// <param name="project">Modified Project entity</param>
         /// <returns>Updated Project</returns>
         /// <response code="200">Project updated</response>
         /// <response code="400">Typed wrong request</response>
@@ -128,14 +169,15 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Creates a Project 
         /// </summary>
-        /// <param name="name">Name of the Project</param>>
+        /// <param name="name">Name of the Project</param>
         /// <param name="startDate">Date when you started to carry out the project.
-        /// Example: 2022-01-22 </param>>
+        /// Example: 2022-01-22 </param>
         /// <param name="completionDate">Date when you completed the project.
-        /// Example: 2022-01-22T18:57:38 </param>>
-        /// <param name="status">May set only 3 values: "NotStarted" OR "Active" OR "Completed"</param>>
+        /// Example: 2022-01-22T18:57:38 </param>
+        /// <param name="status">May set only 3 values: NotStarted OR Active OR Completed
+        /// Example: NotStarted</param>
         /// <param name="priority">The lower the number, the more significant the project.
-        /// Priority cannot be zero. Example: 12 </param>>
+        /// Priority cannot be zero. Example: 12 </param>
         /// <returns>A newly created Project</returns>
         /// <response code="201">New Project created</response>
         /// <response code="400">Typed wrong request</response>

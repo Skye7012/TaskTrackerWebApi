@@ -39,7 +39,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>  
         /// Gets Task by Id
         /// </summary>
-        /// <param name="id">Id of a Task</param>>
+        /// <param name="id">Id of a Task</param>
         /// <returns>Task by Id</returns>
         /// <response code="404">Task not found by typed Id</response> 
         /// <response code="200">Got Task</response>
@@ -62,7 +62,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Gets Tasks that are attached to a Project
         /// </summary>
-        /// <param name="id">Id of a Project</param>>
+        /// <param name="id">Id of a Project</param>
         /// <returns>Gets Tasks that are attached to a Project</returns>
         /// <response code="404">Project not found by typed Id</response> 
         /// <response code="200">Got Tasks that are attached to a Project</response>
@@ -88,8 +88,9 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="200">Got Taks</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("~/api/GetTasks/OrderedBy/Priority")] 
-        public ActionResult<Project> GetTasksOrderedByPriority()
+        public ActionResult<Project> GetTasksOrderedByPriority() //TODO:REDO
         {
+           // var c = _context.Tasks.OrderBy(x=>x.)
             var tasks = _context.Tasks.ToList();
             tasks.Sort(delegate(Task x, Task y)
             {
@@ -103,6 +104,8 @@ namespace TaskTrackerWebApi.Controllers
             });
             return Ok(tasks);
         }
+
+
 
 
         /// <summary>
@@ -121,7 +124,7 @@ namespace TaskTrackerWebApi.Controllers
         ///     }
         ///
         /// </remarks>
-        /// <param name="task">Modified Task entity</param>>
+        /// <param name="task">Modified Task entity</param>
         /// <returns>Updated Task</returns>
         /// <response code="200">Task updated</response>
         /// <response code="400">Typed wrong request</response>
@@ -150,12 +153,13 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Creates a Task 
         /// </summary>
-        /// <param name="name">Name of the task</param>>
-        /// <param name="status">May set only 3 values: "ToDo" OR "InProgress" OR "Done"</param>>
-        /// <param name="description">Description of the task</param>>
+        /// <param name="name">Name of the task</param>
+        /// <param name="status">May set only 3 values: ToDo OR InProgress OR Done
+        /// Example: ToDo</param>
+        /// <param name="description">Description of the task</param>
         /// <param name="priority">The lower the number, the more significant the project.
-        /// Priotiry cannot be zero. Example: 12 </param>>
-        /// <param name="projectId">Id of Project that will keep new Task</param>>
+        /// Priotiry cannot be zero. Example: 12 </param>
+        /// <param name="projectId">Id of Project that will keep new Task</param>
         /// <returns>A newly created Task</returns>
         /// <response code="201">New Task created</response>
         /// <response code="400">Typed wrong request</response>
@@ -181,7 +185,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Deletes a Task by Id
         /// </summary>
-        /// <param name="id">The Id of the Task to be deleted</param>>
+        /// <param name="id">The Id of the Task to be deleted</param>
         /// <response code="200">Task deleted</response>
         /// <response code="400">Typed wrong request</response>
         /// <response code="404">Task not found by typed Id</response>
