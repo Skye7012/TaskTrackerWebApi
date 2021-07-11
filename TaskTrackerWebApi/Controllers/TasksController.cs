@@ -83,30 +83,42 @@ namespace TaskTrackerWebApi.Controllers
 
 
         /// <summary>
-        /// Gets all Taks ordered by Priority
+        /// Gets Tasks ordered by chosen field 
         /// </summary>
-        /// <returns>All Taks ordered by Priority</returns>
-        /// <response code="200">Got Taks</response>
+        /// <remarks> Method don't return Tasks with nullable value at chosen field</remarks>
+        /// <param name="field">The name of the field by which projects will be sorted <br/>
+        /// May set only 2 values: Name OR Priority <br/>
+        /// Example: Name</param>
+        /// <param name="orderType">May set only 2 values: Asc OR Desc <br/>
+        /// Asc is an ascending sort,
+        /// Desc is a descending sort <br/>
+        /// Example: Asc </param> 
+        /// <returns>Tasks ordered by chosen field</returns>  
+        /// <response code="200">Got ordered Tasks</response>
+        /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet("~/api/GetTasks/OrderedBy/Priority")] 
-        public ActionResult<Project> GetTasksOrderedByPriority() //TODO:REDO
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet("~/api/GetTasks/OrderedBy/{field}/{orderType}")]
+        public ActionResult<Project> GetTasksOrderedByField(string field, string orderType)
         {
-           // var c = _context.Tasks.OrderBy(x=>x.)
-            var tasks = _context.Tasks.ToList();
-            tasks.Sort(delegate(Task x, Task y)
+            List<Task> tasks;
+            switch (field)
             {
-                if (x.Priority == null && y.Priority == null) return 0;
-                else if (x.Priority == null) return 1;
-                else if (y.Priority == null) return -1;
-                else
-                {
-                    return x.Priority.Value.CompareTo(y.Priority.Value);
-                }
-            });
+                case "Name":
+                    tasks = _context.Tasks.OrderBy(x => x.Name).ToList();
+                    break;
+                case "Priority":
+                    tasks = _context.Tasks.Where(x => x.Priority.HasValue).OrderBy(x => x.Priority).ToList();
+                    break;
+                default:
+                    return BadRequest();
+            }
+            if (orderType == "Desc")
+                tasks.Reverse();
+            else if (orderType != "Asc")
+                return BadRequest();
             return Ok(tasks);
         }
-
-
 
 
         /// <summary>
