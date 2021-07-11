@@ -7,7 +7,7 @@ namespace TaskTrackerWebApi.Models
 {
     public partial class Project
     {
-        public Project()
+         public Project()
         {
             Tasks = new HashSet<Task>();
         }

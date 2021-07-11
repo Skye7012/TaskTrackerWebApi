@@ -24,7 +24,8 @@ Insert into Project
 Values
 ('WebApi', '2021-07-06', null, 'Active', 1),
 ('Rest', null, null,'NotStarted', 10),
-('Pass the session', '2021-05-20', '2021-06-25','Completed', 2)
+('Pass the session', '2021-05-20', '2021-06-25','Completed', 2),
+('Buy new table', '2020-09-20','2020-10-02','Completed',null)
 
 Insert into Task
 Values
@@ -32,7 +33,8 @@ Values
 ('Create Project', 'InProgress','Create Visual Studio Asp.Net Core WebApi project',  1, 1),
 ('Find a place', 'ToDo','Find a place to rest' , 1, 2),
 ('Probability theory', 'ToDo','Prepare for Probability theory subject' , 2, 3),
-('DWH', 'ToDo','Prepare for DataWareHouse subject' , 1, 3)
+('DWH', 'ToDo','Prepare for DataWareHouse subject' , 1, 3),
+('Choose', 'Done', 'Choose new table', null,4)
 
 
 

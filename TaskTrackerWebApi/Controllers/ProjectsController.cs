@@ -22,6 +22,9 @@ namespace TaskTrackerWebApi.Controllers
             _context = context;
         }
 
+        //delegate static IOrderedQueryable<TSource> Sort<TSource, TKey>(this IQueryable<TSource> source, Expression<Func<TSource, TKey>> keySelector);
+        //delegate System.Linq.IOrderedEnumerable<TSource> Sort<TSource, TKey>(System.Collections.Generic.IEnumerable<TSource> source, Func<TSource, TKey> keySelector);
+
 
         /// <summary>
         /// Gets all Projects
@@ -96,14 +99,23 @@ namespace TaskTrackerWebApi.Controllers
         /// <returns>All Projects ordered by chosen field</returns>  
         /// <response code="200">Got ordered Projects</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
+        //bad reqst
         [HttpGet("~/api/GetProjects/OrderedBy/{field}/{orderType}")]
         public ActionResult<Project> GetProjectsOrderedByField(string field, string orderType) //TODO:complete
         {
             List<Project> projects;
+           //_context.Projects. Sort<Project, Object> sort;
+            if (orderType == "Asc")
+                sort = Enumerable.OrderBy;
+            else if (orderType == "Desc")
+                sort = Enumerable.OrderByDescending;
+            else
+                return BadRequest();
             switch(field)
             {
                 case "Name":
-                    projects = _context.Projects.OrderBy(x => x.Name).ToList();
+                    //projects = _context.Projects.OrderBy(x => x.Name).ToList();
+                    projects = _context.Projects.Sort
                     break;
                 case "StartDate":
                     projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate).ToList();
