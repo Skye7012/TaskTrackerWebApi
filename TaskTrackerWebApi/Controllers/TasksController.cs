@@ -154,11 +154,12 @@ namespace TaskTrackerWebApi.Controllers
         /// Creates a Task 
         /// </summary>
         /// <param name="name">Name of the task</param>
-        /// <param name="status">May set only 3 values: ToDo OR InProgress OR Done
+        /// <param name="status">May set only 3 values: ToDo OR InProgress OR Done <br/>
         /// Example: ToDo</param>
         /// <param name="description">Description of the task</param>
-        /// <param name="priority">The lower the number, the more significant the project.
-        /// Priotiry cannot be zero. Example: 12 </param>
+        /// <param name="priority">The lower the number, the more significant the project <br/>
+        /// Priotiry cannot be zero <br/>
+        /// Example: 12 </param>
         /// <param name="projectId">Id of Project that will keep new Task</param>
         /// <returns>A newly created Task</returns>
         /// <response code="201">New Task created</response>

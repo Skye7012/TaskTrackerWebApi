@@ -90,10 +90,10 @@ namespace TaskTrackerWebApi.Controllers
         /// May set only 4 values: Name OR StartDate OR CompletionDate OR Priority <br/>
         /// Example: Name</param>
         /// <param name="orderType">May set only 2 values: Asc OR Desc <br/>
-        /// Example: Asc <br/>
-        /// Asc is an ascending sort <br/>
-        /// Desc is a descending sort</param> 
-        /// <returns>All Projects ordered by chosen field</returns>
+        /// Asc is an ascending sort,
+        /// Desc is a descending sort <br/>
+        /// Example: Asc </param> 
+        /// <returns>All Projects ordered by chosen field</returns>  
         /// <response code="200">Got ordered Projects</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet("~/api/GetProjects/OrderedBy/{field}/{orderType}")]
@@ -170,14 +170,15 @@ namespace TaskTrackerWebApi.Controllers
         /// Creates a Project 
         /// </summary>
         /// <param name="name">Name of the Project</param>
-        /// <param name="startDate">Date when you started to carry out the project.
+        /// <param name="startDate">Date when you started to carry out the project <br/>
         /// Example: 2022-01-22 </param>
-        /// <param name="completionDate">Date when you completed the project.
+        /// <param name="completionDate">Date when you completed the project <br/>
         /// Example: 2022-01-22T18:57:38 </param>
-        /// <param name="status">May set only 3 values: NotStarted OR Active OR Completed
+        /// <param name="status">May set only 3 values: NotStarted OR Active OR Completed <br/>
         /// Example: NotStarted</param>
-        /// <param name="priority">The lower the number, the more significant the project.
-        /// Priority cannot be zero. Example: 12 </param>
+        /// <param name="priority">The lower the number, the more significant the project <br/>
+        /// Priority cannot be zero <br/>
+        /// Example: 12</param>
         /// <returns>A newly created Project</returns>
         /// <response code="201">New Project created</response>
         /// <response code="400">Typed wrong request</response>
@@ -201,7 +202,7 @@ namespace TaskTrackerWebApi.Controllers
         /// <summary>
         /// Deletes a Project by Id
         /// </summary>
-        /// <remarks>Warning: it's realize cascade delete,
+        /// <remarks>Warning: it's realize cascade delete, 
         /// so Tasks that are kept by chosen Project will be deleted</remarks>
         /// <param name="id">The Id of the Project to be deleted to</param>
         /// <response code="200">Project deleted</response>
