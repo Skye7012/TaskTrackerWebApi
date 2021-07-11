@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -104,29 +105,32 @@ namespace TaskTrackerWebApi.Controllers
         public ActionResult<Project> GetProjectsOrderedByField(string field, string orderType) //TODO:complete
         {
             List<Project> projects;
-           //_context.Projects. Sort<Project, Object> sort;
+            bool isAscending;
             if (orderType == "Asc")
-                sort = Enumerable.OrderBy;
+                isAscending = true;
             else if (orderType == "Desc")
-                sort = Enumerable.OrderByDescending;
+                isAscending = false;
             else
                 return BadRequest();
             switch(field)
             {
                 case "Name":
                     //projects = _context.Projects.OrderBy(x => x.Name).ToList();
-                    projects = _context.Projects.Sort
+                    projects = Sort(x => x.Name, isAscending);
                     break;
                 case "StartDate":
-                    projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate).ToList();
-                    projects.AddRange(_context.Projects.Where(x => !x.StartDate.HasValue)); //nullable values are placed at the end
+                    //projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate).ToList();
+                    //projects.AddRange(_context.Projects.Where(x => !x.StartDate.HasValue)); //nullable values are placed at the end
+                    projects = Sort(x => x.StartDate, x => x.StartDate.HasValue, x=> !x.StartDate.HasValue, isAscending);
                     break;
                 case "CompletionDate":
-                    projects = _context.Projects.Where(x => x.CompletionDate.HasValue).OrderBy(x => x.CompletionDate).ToList(); //TODO: test with new data
-                    projects.AddRange(_context.Projects.Where(x => !x.CompletionDate.HasValue)); //nullable values are placed at the end
+                    //projects = _context.Projects.Where(x => x.CompletionDate.HasValue).OrderBy(x => x.CompletionDate).ToList(); //TODO: test with new data
+                    //projects.AddRange(_context.Projects.Where(x => !x.CompletionDate.HasValue)); //nullable values are placed at the end
+                    projects = Sort(x => x.CompletionDate, x => x.CompletionDate.HasValue, x => !x.CompletionDate.HasValue, isAscending);
                     break;
                 case "Priority":
-                    projects = _context.Projects.OrderBy(x => x.Priority).ToList();
+                    //projects = _context.Projects.OrderBy(x => x.Priority).ToList();
+                    projects = Sort(x => x.Priority, x => x.Priority.HasValue, x => !x.Priority.HasValue, isAscending);
                     break;
                 default:
                     return BadRequest();
@@ -251,6 +255,28 @@ namespace TaskTrackerWebApi.Controllers
         private bool ProjectExists(int id)
         {
             return _context.Projects.Any(e => e.Id == id);
+        }
+        List<Project> Sort<P>(Expression<Func<Project,P>> orderby, bool isAscending)
+        {
+            if(isAscending)
+               return _context.Projects.OrderBy(orderby).ToList();
+            else
+               return _context.Projects.OrderByDescending(orderby).ToList();
+        }
+        List<Project> Sort<P>(Expression<Func<Project, P>> orderBy, Expression<Func<Project, bool>> haveNull, Expression<Func<Project, bool>> notHaveNull, bool isAscending)
+        {
+            List<Project> projects;
+            if (isAscending)
+            {
+                projects = _context.Projects.Where(haveNull).OrderBy(orderBy).ToList();
+                projects.AddRange(_context.Projects.Where(notHaveNull)); //nullable values are placed at the end
+            }
+            else
+            {
+                projects = _context.Projects.Where(haveNull).OrderByDescending(orderBy).ToList();
+                projects.AddRange(_context.Projects.Where(notHaveNull)); //nullable values are placed at the end
+            }
+            return projects;
         }
     }
 }
