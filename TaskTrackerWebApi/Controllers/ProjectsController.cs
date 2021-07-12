@@ -12,15 +12,12 @@ using Task = TaskTrackerWebApi.Models.Task;
 
 namespace TaskTrackerWebApi.Controllers
 {
-   // public enum OrderTypes { Ascending, Descending }
-
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectsController : ControllerBase 
     {
         public enum ProjectOrderFields { Name, StartDate,CompletionDate, Priority }
-        //public enum ProjectOrderTypes { Ascending, Descending }
 
         private readonly TaskTrackerContext _context;
 
@@ -160,7 +157,6 @@ namespace TaskTrackerWebApi.Controllers
         /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[HttpPost("{name}/{startDate}/{completionDate}/{status}/{priority}")]
         [HttpPost("{name}/{status}")]
         public  ActionResult<Project> PostProject(string name, DateTime? startDate, DateTime? completionDate, Project.ProjectStatus status, int? priority) 
         {

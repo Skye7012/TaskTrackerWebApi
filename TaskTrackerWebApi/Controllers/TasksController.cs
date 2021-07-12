@@ -17,7 +17,6 @@ namespace TaskTrackerWebApi.Controllers
     public class TasksController : ControllerBase
     {
         public enum TaskOrderFields { Name, Priority }
-       // public enum TaskOrderTypes { Ascending, Descending }
 
         private readonly TaskTrackerContext _context;
 
@@ -179,7 +178,7 @@ namespace TaskTrackerWebApi.Controllers
         {
             if (_context.Projects.Find(projectId) is null)
                 return NotFound();
-            Task task = new Task(name,status, description, priority,projectId); //TODO:test 
+            Task task = new Task(name,status, description, priority,projectId); 
             try 
             {
                 _context.Tasks.Add(task);
