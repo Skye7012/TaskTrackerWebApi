@@ -51,13 +51,14 @@ https://user-images.githubusercontent.com/86796337/125029275-0d6c9900-e092-11eb-
 </details>
 
 
-<details><summary> GetProjectsOrderedByPriority() demonstration</summary>
+<details><summary> GetProjectsOrderedByField() demonstration</summary>
 
 
-https://user-images.githubusercontent.com/86796337/125030165-4e18e200-e093-11eb-9f20-93342a75ed6d.mp4
+https://user-images.githubusercontent.com/86796337/125275939-4e75df00-e318-11eb-8f8e-155c3163ee15.mp4
 
 
 </details>
+
 
 <details><summary>PutProject(Project project)demonstration</summary>
 
@@ -70,7 +71,7 @@ https://user-images.githubusercontent.com/86796337/125030556-f6c74180-e093-11eb-
 <details><summary>PostProject() demonstration</summary>
 
 
-https://user-images.githubusercontent.com/86796337/125031352-32aed680-e095-11eb-867e-52169c283986.mp4
+https://user-images.githubusercontent.com/86796337/125275974-57ff4700-e318-11eb-8a60-671452a7bf62.mp4
 
 
 </details>
@@ -120,7 +121,7 @@ https://user-images.githubusercontent.com/86796337/125032832-30e61280-e097-11eb-
 <details><summary>GetTasksOrderedByPriority() demonstration</summary>
 
 
-https://user-images.githubusercontent.com/86796337/125032976-67bc2880-e097-11eb-8ae7-106b27d8dc66.mp4
+https://user-images.githubusercontent.com/86796337/125276002-60f01880-e318-11eb-8700-ad5cffccac68.mp4
 
 
 </details>
@@ -140,7 +141,7 @@ https://user-images.githubusercontent.com/86796337/125033210-b4076880-e097-11eb-
 <details><summary>PostTask() demonstration</summary>
 
 
-https://user-images.githubusercontent.com/86796337/125033474-05175c80-e098-11eb-8477-c2dca3ec1c33.mp4
+https://user-images.githubusercontent.com/86796337/125276025-68172680-e318-11eb-8c9c-7745e05e79f1.mp4
 
 
 </details>
