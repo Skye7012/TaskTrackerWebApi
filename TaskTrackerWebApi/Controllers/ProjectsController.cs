@@ -9,13 +9,19 @@ using Microsoft.EntityFrameworkCore;
 using TaskTrackerWebApi.Models;
 using Task = TaskTrackerWebApi.Models.Task;
 
+
 namespace TaskTrackerWebApi.Controllers
 {
+   // public enum OrderTypes { Ascending, Descending }
+
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectsController : ControllerBase 
     {
+        public enum ProjectOrderFields { Name, StartDate,CompletionDate, Priority }
+        //public enum ProjectOrderTypes { Ascending, Descending }
+
         private readonly TaskTrackerContext _context;
 
         public ProjectsController(TaskTrackerContext context)
@@ -62,23 +68,16 @@ namespace TaskTrackerWebApi.Controllers
         /// Gets Projects ordered by chosen field 
         /// </summary>
         /// <remarks> Method don't return Projects with nullable value at chosen field</remarks>
-        /// <param name="field">The name of the field by which projects will be sorted <br/>
-        /// May set only 4 values: Name OR StartDate OR CompletionDate OR Priority <br/>
-        /// Example: Name</param>
-        /// <param name="orderType">May set only 2 values: Asc OR Desc <br/>
-        /// Asc is an ascending sort,
-        /// Desc is a descending sort <br/>
-        /// Example: Asc </param> 
+        /// <param name="field">The name of the field by which projects will be sorted</param>
+        /// <param name="orderType"></param> 
         /// <returns>Projects ordered by chosen field</returns>  
         /// <response code="200">Got ordered Projects</response>
-        /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("~/api/GetProjects/OrderedBy/{field}/{orderType}")]
-        public ActionResult<Project> GetProjectsOrderedByField(string field, string orderType) 
+        public ActionResult<Project> GetProjectsOrderedByField(ProjectOrderFields field, OrderTypes orderType) 
         {
             List<Project> projects;
-            switch (field)
+            switch (field.ToString())
             {
                 case "Name":
                     projects = _context.Projects.OrderBy(x => x.Name).ToList();
@@ -95,10 +94,8 @@ namespace TaskTrackerWebApi.Controllers
                 default:
                     return BadRequest();
             }
-            if (orderType == "Desc")
+            if (orderType == OrderTypes.Descending)
                 projects.Reverse();
-            else if (orderType != "Asc")
-                return BadRequest();
             return Ok(projects);
         }
 
@@ -115,7 +112,7 @@ namespace TaskTrackerWebApi.Controllers
         ///        "Name": "FirstProject",
         ///        "StartDate": "2022-01-22"
         ///        "CompletionDate": "2022-01-22T18:57:38"
-        ///        "Status": "NotStarted" OR "Active" OR "Completed", (You may set only one of this three values)
+        ///        "Status": "NotStarted" OR "Active" OR "Completed" (You may set only one of this three values)
         ///        "Priority": 1
         ///     }
         ///
@@ -154,8 +151,7 @@ namespace TaskTrackerWebApi.Controllers
         /// Example: 2022-01-22 </param>
         /// <param name="completionDate">Date when you completed the project <br/>
         /// Example: 2022-01-22T18:57:38 </param>
-        /// <param name="status">May set only 3 values: NotStarted OR Active OR Completed <br/>
-        /// Example: NotStarted</param>
+        /// <param name="status">Status of the project</param>
         /// <param name="priority">The lower the number, the more significant the project <br/>
         /// Priority cannot be zero <br/>
         /// Example: 12</param>
@@ -166,7 +162,7 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         //[HttpPost("{name}/{startDate}/{completionDate}/{status}/{priority}")]
         [HttpPost("{name}/{status}")]
-        public  ActionResult<Project> PostProject(string name, DateTime? startDate, DateTime? completionDate, string status, int? priority) 
+        public  ActionResult<Project> PostProject(string name, DateTime? startDate, DateTime? completionDate, Project.ProjectStatus status, int? priority) 
         {
             Project project = new Project(name, startDate, completionDate, status, priority);
             try 

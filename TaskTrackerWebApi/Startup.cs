@@ -14,6 +14,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using TaskTrackerWebApi.Models;
+using TaskTrackerWebApi.Schema;
 
 namespace TaskTrackerWebApi
 {
@@ -38,6 +39,8 @@ namespace TaskTrackerWebApi
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";  
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+                c.SchemaFilter<EnumSchemaFilter>();
+                
             });
             services.AddScoped(typeof(TaskTrackerContext));  //add scoped service of TaskTrackerContext type
         }

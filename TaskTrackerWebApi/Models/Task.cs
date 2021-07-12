@@ -7,10 +7,12 @@ namespace TaskTrackerWebApi.Models
 {
     public partial class Task
     {
-        public Task(string name, string status, string description, int? priority, int projectId)
+        public enum TaskStatus { ToDo, InProgress, Done }
+        public Task() { }
+        public Task(string name, TaskStatus status, string description, int? priority, int projectId)
         {
             Name = name;
-            Status = status;
+            Status = status.ToString();
             Description = description;
             Priority = priority;
             ProjectId = projectId;

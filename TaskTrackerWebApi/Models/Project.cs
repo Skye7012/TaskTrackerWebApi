@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TaskTrackerWebApi.Controllers;
 
 #nullable disable
 
@@ -7,17 +8,18 @@ namespace TaskTrackerWebApi.Models
 {
     public partial class Project
     {
-         public Project()
+        public enum ProjectStatus {NotStarted,Active,Completed}
+        public Project()
         {
             Tasks = new HashSet<Task>();
         }
-        public Project(string name, DateTime? startDate, DateTime? completionDate, string status, int? priority)
+        public Project(string name, DateTime? startDate, DateTime? completionDate, ProjectStatus status, int? priority)
         {
             Tasks = new HashSet<Task>();
             Name = name;
             StartDate = startDate;
             CompletionDate = completionDate;
-            Status = status;
+            Status = status.ToString();
             Priority = priority;
         }
 
@@ -29,5 +31,6 @@ namespace TaskTrackerWebApi.Models
         public int? Priority { get; set; }
         [System.Text.Json.Serialization.JsonIgnore]
         public virtual ICollection<Task> Tasks { get; set; }
+
     }
 }

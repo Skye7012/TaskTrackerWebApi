@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTrackerWebApi.Models;
 using Task = TaskTrackerWebApi.Models.Task;
+using TaskStatus = TaskTrackerWebApi.Models.Task.TaskStatus;
 
 namespace TaskTrackerWebApi.Controllers
 {
@@ -15,13 +16,15 @@ namespace TaskTrackerWebApi.Controllers
     [ApiController]
     public class TasksController : ControllerBase
     {
+        public enum TaskOrderFields { Name, Priority }
+       // public enum TaskOrderTypes { Ascending, Descending }
+
         private readonly TaskTrackerContext _context;
 
         public TasksController(TaskTrackerContext context)
         {
             _context = context;
         }
-
         
 
         /// <summary>
@@ -86,23 +89,16 @@ namespace TaskTrackerWebApi.Controllers
         /// Gets Tasks ordered by chosen field 
         /// </summary>
         /// <remarks> Method don't return Tasks with nullable value at chosen field</remarks>
-        /// <param name="field">The name of the field by which projects will be sorted <br/>
-        /// May set only 2 values: Name OR Priority <br/>
-        /// Example: Name</param>
-        /// <param name="orderType">May set only 2 values: Asc OR Desc <br/>
-        /// Asc is an ascending sort,
-        /// Desc is a descending sort <br/>
-        /// Example: Asc </param> 
+        /// <param name="field">The name of the field by which projects will be sorted</param>
+        /// <param name="orderType"></param> 
         /// <returns>Tasks ordered by chosen field</returns>  
         /// <response code="200">Got ordered Tasks</response>
-        /// <response code="400">Typed wrong request</response>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpGet("~/api/GetTasks/OrderedBy/{field}/{orderType}")]
-        public ActionResult<Project> GetTasksOrderedByField(string field, string orderType)
+        public ActionResult<Project> GetTasksOrderedByField(TaskOrderFields field, OrderTypes orderType)
         {
             List<Task> tasks;
-            switch (field)
+            switch (field.ToString())
             {
                 case "Name":
                     tasks = _context.Tasks.OrderBy(x => x.Name).ToList();
@@ -113,10 +109,8 @@ namespace TaskTrackerWebApi.Controllers
                 default:
                     return BadRequest();
             }
-            if (orderType == "Desc")
+            if (orderType == OrderTypes.Descending)
                 tasks.Reverse();
-            else if (orderType != "Asc")
-                return BadRequest();
             return Ok(tasks);
         }
 
@@ -167,8 +161,7 @@ namespace TaskTrackerWebApi.Controllers
         /// Creates a Task 
         /// </summary>
         /// <param name="name">Name of the task</param>
-        /// <param name="status">May set only 3 values: ToDo OR InProgress OR Done <br/>
-        /// Example: ToDo</param>
+        /// <param name="status">Status of the Task</param>
         /// <param name="description">Description of the task</param>
         /// <param name="priority">The lower the number, the more significant the project <br/>
         /// Priotiry cannot be zero <br/>
@@ -182,11 +175,11 @@ namespace TaskTrackerWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpPost("{name}/{status}/{description}/{projectId}")]
-        public  ActionResult<Task> PostTask(string name, string status, string description, int? priority, int projectId)
+        public  ActionResult<Task> PostTask(string name, TaskStatus status, string description, int? priority, int projectId)
         {
             if (_context.Projects.Find(projectId) is null)
                 return NotFound();
-            Task task = new Task(name,status, description, priority,projectId);
+            Task task = new Task(name,status, description, priority,projectId); //TODO:test 
             try 
             {
                 _context.Tasks.Add(task);
