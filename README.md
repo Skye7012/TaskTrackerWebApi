@@ -118,7 +118,7 @@ https://user-images.githubusercontent.com/86796337/125032832-30e61280-e097-11eb-
 </details>
 
 
-<details><summary>GetTasksOrderedByPriority() demonstration</summary>
+<details><summary>GetTasksOrderedByField() demonstration</summary>
 
 
 https://user-images.githubusercontent.com/86796337/125276002-60f01880-e318-11eb-8700-ad5cffccac68.mp4
