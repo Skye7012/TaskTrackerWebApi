@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using TaskTrackerWebApi.Models;
 using Task = TaskTrackerWebApi.Models.Task;
 using TaskStatus = TaskTrackerWebApi.Models.Task.TaskStatus;
+using TaskTrackerWebApi.Extensions;
+using static TaskTrackerWebApi.Extensions.Extension;
 
 namespace TaskTrackerWebApi.Controllers
 {
@@ -97,19 +99,17 @@ namespace TaskTrackerWebApi.Controllers
         public ActionResult<Project> GetTasksOrderedByField(TaskOrderFields field, OrderTypes orderType)
         {
             List<Task> tasks;
-            switch (field.ToString())
+            switch (field)
             {
-                case "Name":
-                    tasks = _context.Tasks.OrderBy(x => x.Name).ToList();
+                case TaskOrderFields.Name:
+                    tasks = _context.Tasks.OrderBy(x => x.Name, orderType).ToList();
                     break;
-                case "Priority":
-                    tasks = _context.Tasks.Where(x => x.Priority.HasValue).OrderBy(x => x.Priority).ToList();
+                case TaskOrderFields.Priority:
+                    tasks = _context.Tasks.Where(x => x.Priority.HasValue).OrderBy(x => x.Priority, orderType).ToList();
                     break;
                 default:
                     return BadRequest();
             }
-            if (orderType == OrderTypes.Descending)
-                tasks.Reverse();
             return Ok(tasks);
         }
 

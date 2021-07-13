@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TaskTrackerWebApi.Models;
 using Task = TaskTrackerWebApi.Models.Task;
-
+using TaskTrackerWebApi.Extensions;
+using static TaskTrackerWebApi.Extensions.Extension;
 
 namespace TaskTrackerWebApi.Controllers
 {
@@ -74,25 +75,23 @@ namespace TaskTrackerWebApi.Controllers
         public ActionResult<Project> GetProjectsOrderedByField(ProjectOrderFields field, OrderTypes orderType) 
         {
             List<Project> projects;
-            switch (field.ToString())
+            switch (field)
             {
-                case "Name":
-                    projects = _context.Projects.OrderBy(x => x.Name).ToList();
+                case ProjectOrderFields.Name:
+                    projects = _context.Projects.OrderBy(x => x.Name, orderType).ToList();
                     break;
-                case "StartDate":
-                    projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate).ToList();
+                case ProjectOrderFields.StartDate:
+                    projects = _context.Projects.Where(x => x.StartDate.HasValue).OrderBy(x => x.StartDate, orderType).ToList();
                     break;
-                case "CompletionDate":
-                    projects = _context.Projects.Where(x => x.CompletionDate.HasValue).OrderBy(x => x.CompletionDate).ToList();
+                case ProjectOrderFields.CompletionDate:
+                    projects = _context.Projects.Where(x => x.CompletionDate.HasValue).OrderBy(x => x.CompletionDate, orderType).ToList();
                     break;
-                case "Priority":
-                    projects = _context.Projects.Where(x => x.Priority.HasValue).OrderBy(x => x.Priority).ToList(); 
+                case ProjectOrderFields.Priority:
+                    projects = _context.Projects.Where(x => x.Priority.HasValue).OrderBy(x => x.Priority, orderType).ToList(); 
                     break;
                 default:
                     return BadRequest();
             }
-            if (orderType == OrderTypes.Descending)
-                projects.Reverse();
             return Ok(projects);
         }
 
